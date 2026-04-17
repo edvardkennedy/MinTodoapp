@@ -1,6 +1,9 @@
 from flask import Flask, jsonify, request
 import json
-import os
+if __name__ == '__main__':
+    import os
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host='0.0.0.0', port=port)
  
 app = Flask(__name__)
 DB_FILE = 'todos.json'
@@ -50,7 +53,4 @@ def create_todo():
     data.append(new_entry)
     save_data(data)
     return jsonify({"message": "Notat opprettet", "id": new_id}), 201
- 
-if __name__ == '__main__':
-    # Vi kjører serveren på port 5000
-    app.run(debug=True, port=5000)
+
